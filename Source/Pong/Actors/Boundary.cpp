@@ -15,9 +15,23 @@ ABoundary::ABoundary()
 	RootComponent = Bounds;
 }
 
+void ABoundary::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (OtherActor && (OtherActor != this) && OtherComp)
+	{
+		 if (IsGoal)
+		 {
+		 	OtherActor->Destroy();
+		 }
+	}
+}
+
 void ABoundary::BeginPlay()
 {
 	Super::BeginPlay();
+	
 	GameModeRef = Cast<APongGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
+	Bounds->OnComponentBeginOverlap.AddDynamic(this, &ABoundary::OnOverlapBegin);
 }
 

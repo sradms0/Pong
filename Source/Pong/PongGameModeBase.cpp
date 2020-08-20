@@ -21,7 +21,7 @@ void APongGameModeBase::SpawnBall()
         UE_LOG(LogTemp, Error, TEXT("No Ball class to spawn from"));
         return;
     }
-    BallRef = GetWorld()->SpawnActor<ABall>(GeneratedBPBall->GeneratedClass, FVector(), FRotator());
+    BallRef = GetWorld()->SpawnActor<ABall>(GeneratedBPBall->GeneratedClass, FVector(10, 0, 0), FRotator());
 
     FRandomStream RandomStream;
     RandomStream.GenerateNewSeed();
