@@ -21,8 +21,8 @@ public:
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Float", meta = (BlueprintProtected))
-	float Speed = 10.0f;
-
+	float Speed = 1000.0f;
+	
 	ABall* BallRef;
 
 private:
