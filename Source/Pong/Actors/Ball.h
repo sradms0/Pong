@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Ball.generated.h"
 
+class APaddleBase;
 class USphereComponent;
 class UPaperSpriteComponent;
 
@@ -17,6 +18,11 @@ class PONG_API ABall : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ABall();
+	
+	UFUNCTION()
+	void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor,
+	                    class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep,
+	                    const FHitResult& SweepResult);
 
 protected:
 	// Called when the game starts or when spawned
@@ -28,4 +34,6 @@ private:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Sprite", meta = (AllowPrivateAccess = "true"))
 	UPaperSpriteComponent* Sprite;
+
+	void HitPaddle(APaddleBase* Paddle) const;
 };

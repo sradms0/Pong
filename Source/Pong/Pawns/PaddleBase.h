@@ -19,6 +19,8 @@ public:
 	// Sets default values for this pawn's properties
 	APaddleBase();
 
+	FVector GetColliderLinearVelocity() const;
+
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Float", meta = (BlueprintProtected))
 	float Speed = 1000.0f;

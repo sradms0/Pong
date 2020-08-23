@@ -17,3 +17,8 @@ APaddleBase::APaddleBase()
 	Sprite = CreateDefaultSubobject<UPaperSpriteComponent>(TEXT("Sprite"));
 	Sprite->SetupAttachment(RootComponent);
 }
+
+FVector APaddleBase::GetColliderLinearVelocity() const
+{
+	return Cast<UPrimitiveComponent>(Collider)->GetPhysicsLinearVelocity();
+}
