@@ -11,6 +11,11 @@ void APongGameModeBase::BeginPlay()
     SpawnBall();
 }
 
+ABall* APongGameModeBase::GetBallRef()
+{
+    return BallRef;
+}
+
 void APongGameModeBase::SpawnBall()
 {
     UObject* BallActorToSpawn = Cast<UObject>(StaticLoadObject(UObject::StaticClass(), nullptr, TEXT("/Game/Blueprints/BP_Ball.BP_Ball")));

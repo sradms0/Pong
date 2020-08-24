@@ -19,6 +19,9 @@ class PONG_API APongGameModeBase : public AGameModeBase
 protected:
     virtual void BeginPlay() override;
 
+public:
+    ABall* GetBallRef();
+
 private:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "References", meta = (AllowPrivateAccess = "true"))
     ABall* BallRef;
