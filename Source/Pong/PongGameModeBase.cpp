@@ -2,7 +2,8 @@
 
 
 #include "PongGameModeBase.h"
-#include "Actors/Ball.h"
+#include "Pong/Actors/Ball.h"
+#include "Pong/Actors/Boundary.h"
 #include "Kismet/KismetMathLibrary.h"
 
 void APongGameModeBase::BeginPlay()
@@ -14,6 +15,18 @@ void APongGameModeBase::BeginPlay()
 ABall* APongGameModeBase::GetBallRef()
 {
     return BallRef;
+}
+
+void APongGameModeBase::SetScore(bool IsLeftGoal)
+{
+	if (IsLeftGoal)
+	{
+		AIScore++;
+	}
+	else
+	{
+		PlayerScore++;
+	}
 }
 
 void APongGameModeBase::SpawnBall()

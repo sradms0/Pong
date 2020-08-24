@@ -16,14 +16,17 @@ ABoundary::ABoundary()
 }
 
 void ABoundary::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
-	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+                               int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	if (OtherActor && (OtherActor != this) && OtherComp)
 	{
-		 if (IsGoal)
-		 {
-		 	OtherActor->Destroy();
-		 }
+		if (!IsGoal)
+		{
+			return;
+		}
+
+		GameModeRef->SetScore(IsLeftGoal);
+		OtherActor->Destroy();
 	}
 }
 
