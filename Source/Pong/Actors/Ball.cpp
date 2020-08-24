@@ -4,6 +4,7 @@
 #include "Ball.h"
 #include "Components/SphereComponent.h"
 #include "PaperSpriteComponent.h"
+#include "Pong/Actors/Boundary.h"
 #include "Pong/Pawns/PaddleBase.h"
 
 // Sets default values
@@ -24,9 +25,15 @@ void ABall::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAct
 	if (OtherActor && (OtherActor != this) && OtherComp)
 	{
 		APaddleBase* Paddle = Cast<APaddleBase>(OtherActor);
+		ABoundary* Boundary = Cast<ABoundary>(OtherActor);
+		
 		if (Paddle)
 		{
 			HitPaddle(Paddle);
+		}
+		else if (Boundary)
+		{
+			HitBoundary();
 		}
 	}
 }
@@ -54,4 +61,18 @@ void ABall::HitPaddle(APaddleBase* Paddle) const
 	SpherePrimitive->SetPhysicsLinearVelocity(
 		FVector(CurrentSphereVelocity.X * -1, CurrentSphereVelocity.Y, NewSphereVelocityZ)
 	);	
+}
+
+void ABall::HitBoundary() const
+{
+	FRandomStream RandomStream;
+	RandomStream.GenerateNewSeed();
+
+	UPrimitiveComponent* SpherePrimitive = Cast<UPrimitiveComponent>(Sphere);
+	const FVector CurrentSphereVelocity = SpherePrimitive->GetPhysicsLinearVelocity();
+	const float NewSphereVelocityZ = (CurrentSphereVelocity.Z * -1) + (RandomStream.FRandRange(-200.0f, 200.0f));
+	
+	SpherePrimitive->SetPhysicsLinearVelocity(
+		FVector(CurrentSphereVelocity.X * -1, CurrentSphereVelocity.Y, NewSphereVelocityZ)
+	);
 }

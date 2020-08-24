@@ -36,4 +36,6 @@ private:
 	UPaperSpriteComponent* Sprite;
 
 	void HitPaddle(APaddleBase* Paddle) const;
+
+	void HitBoundary() const;
 };
