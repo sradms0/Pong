@@ -64,8 +64,7 @@ void APongGameModeBase::SpawnBall(float InitialDirection)
 
 	Direction = InitialDirection;
     
-    UPrimitiveComponent* Root = Cast<UPrimitiveComponent>(BallRef->GetRootComponent());
-    Root->SetPhysicsLinearVelocity(FVector(Direction * BallSpeed, 0, 0), true);
+	GetWorld()->GetTimerManager().SetTimer(InitialBallVelocityTimerHandle, this, &APongGameModeBase::InitializeBallVelocity, InitialBallVelocityDelay, false);
 }
 
 float APongGameModeBase::GenerateRandomDirection()
@@ -74,4 +73,10 @@ float APongGameModeBase::GenerateRandomDirection()
     RandomStream.GenerateNewSeed();
 	
     return UKismetMathLibrary::SignOfFloat(RandomStream.FRandRange(-1.0f, 1.0f));
+}
+
+void APongGameModeBase::InitializeBallVelocity()
+{
+    UPrimitiveComponent* Root = Cast<UPrimitiveComponent>(BallRef->GetRootComponent());
+    Root->SetPhysicsLinearVelocity(FVector(Direction * BallSpeed, 0, 0), true);
 }

@@ -31,12 +31,13 @@ public:
     
     UFUNCTION(BlueprintCallable, Category = "Scores")
     int32 GetPlayerScore();
-    
-
 
 private:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "References", meta = (AllowPrivateAccess = "true"))
     ABall* BallRef;
+    
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ball Movement", meta = (AllowPrivateAccess = "true"))
+    float InitialBallVelocityDelay = 1.0f;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Ball Movement", meta = (AllowPrivateAccess = "true"))
     float Direction = -1;
@@ -50,9 +51,14 @@ private:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Scores", meta = (AllowPrivateAccess = "true"))
     int32 AIScore = 0;
 
+    FTimerHandle InitialBallVelocityTimerHandle;
+    
     void SpawnBall(float InitialDirection);
     
     float GenerateRandomDirection();
+    
+    void InitializeBallVelocity();
+    
 };
 
 
