@@ -50,7 +50,9 @@ private:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Scores", meta = (AllowPrivateAccess = "true"))
     int32 AIScore = 0;
 
-    void SpawnBall();
+    void SpawnBall(float InitialDirection);
+    
+    float GenerateRandomDirection();
 };
 
 

@@ -14,7 +14,7 @@ APongGameModeBase::APongGameModeBase():Super()
 void APongGameModeBase::BeginPlay()
 {
     Super::BeginPlay();
-    SpawnBall();
+    SpawnBall(GenerateRandomDirection());
 }
 
 ABall* APongGameModeBase::GetBallRef()
@@ -34,17 +34,23 @@ int32 APongGameModeBase::GetPlayerScore()
 
 void APongGameModeBase::SetScore(bool IsLeftGoal)
 {
+	float RespawnDirection;
+	
 	if (IsLeftGoal)
 	{
 		AIScore++;
+		RespawnDirection = -1.0f;
 	}
 	else
 	{
 		PlayerScore++;
+		RespawnDirection = 1.0f;
 	}
+
+	SpawnBall(RespawnDirection);
 }
 
-void APongGameModeBase::SpawnBall()
+void APongGameModeBase::SpawnBall(float InitialDirection)
 {
     UObject* BallActorToSpawn = Cast<UObject>(StaticLoadObject(UObject::StaticClass(), nullptr, TEXT("/Game/Blueprints/BP_Ball.BP_Ball")));
     UBlueprint* GeneratedBPBall = Cast<UBlueprint>(BallActorToSpawn);
@@ -56,10 +62,16 @@ void APongGameModeBase::SpawnBall()
     }
     BallRef = GetWorld()->SpawnActor<ABall>(GeneratedBPBall->GeneratedClass, FVector(10, 0, 0), FRotator());
 
-    FRandomStream RandomStream;
-    RandomStream.GenerateNewSeed();
-    Direction = UKismetMathLibrary::SignOfFloat(RandomStream.FRandRange(-1.0f, 1.0f));
+	Direction = InitialDirection;
     
     UPrimitiveComponent* Root = Cast<UPrimitiveComponent>(BallRef->GetRootComponent());
     Root->SetPhysicsLinearVelocity(FVector(Direction * BallSpeed, 0, 0), true);
+}
+
+float APongGameModeBase::GenerateRandomDirection()
+{
+    FRandomStream RandomStream;
+    RandomStream.GenerateNewSeed();
+	
+    return UKismetMathLibrary::SignOfFloat(RandomStream.FRandRange(-1.0f, 1.0f));
 }
