@@ -20,9 +20,19 @@ protected:
     virtual void BeginPlay() override;
 
 public:
+    APongGameModeBase();
+    
     ABall* GetBallRef();
-
+    
     void SetScore(bool IsLeftGoal);
+
+    UFUNCTION(BlueprintCallable, Category = "Scores")
+    int32 GetAIScore();
+    
+    UFUNCTION(BlueprintCallable, Category = "Scores")
+    int32 GetPlayerScore();
+    
+
 
 private:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "References", meta = (AllowPrivateAccess = "true"))
