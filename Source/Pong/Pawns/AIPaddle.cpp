@@ -46,5 +46,5 @@ void AAIPaddle::Tick(float DeltaSeconds)
     
     const FVector Target = FVector(850, 10, TargetZ);
     const FVector NewLocation = FMath::VInterpConstantTo(GetActorLocation(), Target, DeltaSeconds, InterpSpeed);
-    SetActorLocation(NewLocation);
+    SetActorLocation(NewLocation, true);
 }
