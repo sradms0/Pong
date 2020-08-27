@@ -60,7 +60,7 @@ void ABall::HitPaddle(APaddleBase* Paddle) const
 	
 	SpherePrimitive->SetPhysicsLinearVelocity(
 		FVector(CurrentSphereVelocity.X * -1, CurrentSphereVelocity.Y, NewSphereVelocityZ)
-	);	
+	);
 }
 
 void ABall::HitBoundary() const

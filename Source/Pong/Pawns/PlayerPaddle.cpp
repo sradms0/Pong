@@ -28,6 +28,7 @@ void APlayerPaddle::Tick(float DeltaSeconds)
 void APlayerPaddle::Move()
 {
     AddActorLocalOffset(MoveDirection, true);
+    Cast<UPrimitiveComponent>(RootComponent)->SetPhysicsLinearVelocity(MoveDirection);
 }
 
 void APlayerPaddle::CalculateMoveInput(float Value)
