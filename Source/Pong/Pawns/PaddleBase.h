@@ -7,6 +7,7 @@
 #include "PaddleBase.generated.h"
 
 class ABall;
+class APongGameModeBase;
 class UBoxComponent;
 class UPaperSpriteComponent;
 
@@ -24,8 +25,12 @@ public:
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Float", meta = (BlueprintProtected))
 	float Speed = 1000.0f;
+
+	APongGameModeBase* GameModeRef;
 	
 	ABall* BallRef;
+
+	virtual void BeginPlay() override;
 
 	virtual void Move();
 	

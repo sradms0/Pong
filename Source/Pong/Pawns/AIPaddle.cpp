@@ -2,7 +2,6 @@
 
 
 #include "AIPaddle.h"
-#include "Kismet/GameplayStatics.h"
 #include "Pong/Actors/Ball.h"
 #include "Pong/PongGameModeBase.h"
 
@@ -26,7 +25,6 @@ void AAIPaddle::Move()
 {
     Super::Move();
     
-    APongGameModeBase* GameModeRef = Cast<APongGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
     if (GameModeRef == nullptr)
     {
         return;

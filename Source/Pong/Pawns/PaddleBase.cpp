@@ -3,8 +3,10 @@
 
 #include "PaddleBase.h"
 #include "Pong/Actors/Ball.h"
+#include "Pong/PongGameModeBase.h"
 #include "PaperSpriteComponent.h"
 #include "Components/BoxComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 APaddleBase::APaddleBase()
@@ -27,6 +29,12 @@ FVector APaddleBase::GetColliderLinearVelocity() const
 void APaddleBase::SetColliderLinearVelocity(const FVector Velocity) const
 {
 	return PrimitiveRootComponent->SetPhysicsLinearVelocity(Velocity);
+}
+
+void APaddleBase::BeginPlay()
+{
+	Super::BeginPlay();
+	GameModeRef = Cast<APongGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
 }
 
 void APaddleBase::Move() {}
