@@ -7,6 +7,7 @@
 #include "PongGameModeBase.generated.h"
 
 class ABall;
+class APaddleBase;
 
 /**
  * 
@@ -42,6 +43,15 @@ private:
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Ball Movement", meta = (AllowPrivateAccess = "true"))
     float Direction = -1;
     
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawn Locations", meta = (AllowPrivateAccess = "true"))
+    FVector BallSpawnLocation = FVector(0, 0, 0);
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawn Locations", meta = (AllowPrivateAccess = "true"))
+    FVector PlayerPaddleSpawnLocation = FVector(-850, 10, 0);
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawn Locations", meta = (AllowPrivateAccess = "true"))
+    FVector AIPaddleSpawnLocation = FVector(850, 10, 0);
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ball Movement", meta = (AllowPrivateAccess = "true"))
     float BallSpeed = 1400.0f;
 
@@ -53,12 +63,22 @@ private:
 
     FTimerHandle InitialBallVelocityTimerHandle;
     
-    void SpawnBall(float InitialDirection);
+    void SpawnBall(const float InitialDirection);
+    
+    void SpawnPlayerPaddle();
+    
+    void SpawnAIPaddle();
+
+    UBlueprint* GenerateBlueprintForSpawn(const TCHAR* BPPath) const;
+
+    UBlueprint* GenerateBallBlueprintForSpawn() const;
+    
+    UBlueprint* GeneratePlayerPaddleBlueprintForSpawn() const;
+    
+    UBlueprint* GenerateAIPaddleBlueprintForSpawn() const;
 
     static float GenerateRandomDirection();
     
     void InitializeBallVelocity() const;
-    
 };
-
 
