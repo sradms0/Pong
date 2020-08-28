@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "AIPaddle.h"
 #include "Pong/Actors/Ball.h"
 #include "Pong/PongGameModeBase.h"
@@ -49,6 +48,8 @@ void AAIPaddle::Move()
     }
     
     const FVector Target = FVector(850, 10, TargetZ);
-    const FVector NewLocation = FMath::VInterpConstantTo(GetActorLocation(), Target, GetWorld()->GetDeltaSeconds(), InterpSpeed);
+    const FVector NewLocation = FMath::VInterpConstantTo(
+        GetActorLocation(), Target, GetWorld()->GetDeltaSeconds(), InterpSpeed
+    );
     SetActorLocation(NewLocation, true);
 }
