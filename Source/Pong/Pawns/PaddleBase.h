@@ -26,6 +26,8 @@ protected:
 	float Speed = 1000.0f;
 	
 	ABall* BallRef;
+
+	virtual void Move();
 	
 	void SetColliderLinearVelocity(const FVector Velocity) const;
 

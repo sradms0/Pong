@@ -24,5 +24,5 @@ public:
     
     
 private:
-    
+    virtual void Move() override;
 };

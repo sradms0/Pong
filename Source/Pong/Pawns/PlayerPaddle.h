@@ -27,7 +27,7 @@ public:
 private:
     FVector MoveDirection;
     
-    void Move();
+    virtual void Move() override;
     
     void CalculateMoveInput(float Value);
     

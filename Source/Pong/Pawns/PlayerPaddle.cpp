@@ -27,6 +27,7 @@ void APlayerPaddle::Tick(float DeltaSeconds)
 
 void APlayerPaddle::Move()
 {
+    Super::Move();
     AddActorLocalOffset(MoveDirection, true);
     SetColliderLinearVelocity(MoveDirection);
 }

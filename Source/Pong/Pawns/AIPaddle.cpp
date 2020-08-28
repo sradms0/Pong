@@ -20,6 +20,13 @@ void AAIPaddle::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
 
+    Move();
+}
+
+void AAIPaddle::Move()
+{
+    Super::Move();
+    
     APongGameModeBase* GameModeRef = Cast<APongGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
     if (GameModeRef == nullptr)
     {
@@ -45,6 +52,6 @@ void AAIPaddle::Tick(float DeltaSeconds)
     }
     
     const FVector Target = FVector(850, 10, TargetZ);
-    const FVector NewLocation = FMath::VInterpConstantTo(GetActorLocation(), Target, DeltaSeconds, InterpSpeed);
+    const FVector NewLocation = FMath::VInterpConstantTo(GetActorLocation(), Target, GetWorld()->GetDeltaSeconds(), InterpSpeed);
     SetActorLocation(NewLocation, true);
 }

@@ -28,3 +28,5 @@ void APaddleBase::SetColliderLinearVelocity(const FVector Velocity) const
 {
 	return PrimitiveRootComponent->SetPhysicsLinearVelocity(Velocity);
 }
+
+void APaddleBase::Move() {}
