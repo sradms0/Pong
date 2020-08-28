@@ -18,7 +18,7 @@ class PONG_API APaddleBase : public APawn
 public:
 	// Sets default values for this pawn's properties
 	APaddleBase();
-
+	
 	FVector GetColliderLinearVelocity() const;
 
 protected:
@@ -26,8 +26,12 @@ protected:
 	float Speed = 1000.0f;
 	
 	ABall* BallRef;
+	
+	void SetColliderLinearVelocity(const FVector Velocity) const;
 
 private:
+	UPrimitiveComponent* PrimitiveRootComponent;
+	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Collision", meta = (AllowPrivateAccess = "true"))
 	UBoxComponent* Collider;
 	

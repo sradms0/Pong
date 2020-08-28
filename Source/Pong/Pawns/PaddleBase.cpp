@@ -13,6 +13,7 @@ APaddleBase::APaddleBase()
 
 	Collider = CreateDefaultSubobject<UBoxComponent>(TEXT("Collision"));
 	RootComponent = Collider;
+    PrimitiveRootComponent = Cast<UPrimitiveComponent>(RootComponent);
 
 	Sprite = CreateDefaultSubobject<UPaperSpriteComponent>(TEXT("Sprite"));
 	Sprite->SetupAttachment(RootComponent);
@@ -20,5 +21,10 @@ APaddleBase::APaddleBase()
 
 FVector APaddleBase::GetColliderLinearVelocity() const
 {
-	return Cast<UPrimitiveComponent>(Collider)->GetPhysicsLinearVelocity();
+	return PrimitiveRootComponent->GetPhysicsLinearVelocity();
+}
+
+void APaddleBase::SetColliderLinearVelocity(const FVector Velocity) const
+{
+	return PrimitiveRootComponent->SetPhysicsLinearVelocity(Velocity);
 }
