@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class PONG_API AGameHUD : public AHUD
+class PONG_API AGameHUD final : public AHUD
 {
 	GENERATED_BODY()
 

@@ -10,7 +10,7 @@ class APongGameModeBase;
 class UBoxComponent;
 
 UCLASS()
-class PONG_API ABoundary : public AActor
+class PONG_API ABoundary final : public AActor
 {
 	GENERATED_BODY()
 

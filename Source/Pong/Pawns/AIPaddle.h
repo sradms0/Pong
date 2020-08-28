@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class PONG_API AAIPaddle : public APaddleBase
+class PONG_API AAIPaddle final : public APaddleBase
 {
 	GENERATED_BODY()
 

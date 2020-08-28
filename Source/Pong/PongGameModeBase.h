@@ -12,7 +12,7 @@ class ABall;
  * 
  */
 UCLASS()
-class PONG_API APongGameModeBase : public AGameModeBase
+class PONG_API APongGameModeBase final : public AGameModeBase
 {
 	GENERATED_BODY()
 
