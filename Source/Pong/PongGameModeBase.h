@@ -22,15 +22,15 @@ protected:
 public:
     APongGameModeBase();
     
-    ABall* GetBallRef();
+    ABall* GetBallRef() const;
     
     void SetScore(bool IsLeftGoal);
 
     UFUNCTION(BlueprintCallable, Category = "Scores")
-    int32 GetAIScore();
+    int32 GetAIScore() const;
     
     UFUNCTION(BlueprintCallable, Category = "Scores")
-    int32 GetPlayerScore();
+    int32 GetPlayerScore() const;
 
 private:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "References", meta = (AllowPrivateAccess = "true"))
@@ -54,10 +54,10 @@ private:
     FTimerHandle InitialBallVelocityTimerHandle;
     
     void SpawnBall(float InitialDirection);
+
+    static float GenerateRandomDirection();
     
-    float GenerateRandomDirection();
-    
-    void InitializeBallVelocity();
+    void InitializeBallVelocity() const;
     
 };
 
