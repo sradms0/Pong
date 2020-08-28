@@ -19,7 +19,6 @@ AAIPaddle::AAIPaddle()
 void AAIPaddle::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
-
     Move();
 }
 

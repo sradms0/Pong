@@ -15,12 +15,12 @@ class PONG_API AAIPaddle final : public APaddleBase
 	GENERATED_BODY()
 
 protected:
-    void BeginPlay() override;
+    virtual void BeginPlay() override;
     
 public:
     AAIPaddle();
 
-    void Tick(float DeltaSeconds) override;
+    virtual void Tick(float DeltaSeconds) override;
     
     
 private:
