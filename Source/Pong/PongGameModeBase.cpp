@@ -52,26 +52,29 @@ void APongGameModeBase::SetScore(const bool IsLeftGoal)
 
 void APongGameModeBase::SpawnBall(const float InitialDirection)
 {
-    UObject* BallActorToSpawn = Cast<UObject>(StaticLoadObject(UObject::StaticClass(), nullptr, TEXT("/Game/Blueprints/BP_Ball.BP_Ball")));
+    UObject* BallActorToSpawn = Cast<UObject>(
+	    StaticLoadObject(UObject::StaticClass(), nullptr, TEXT("/Game/Blueprints/BP_Ball.BP_Ball"))
+	);
     UBlueprint* GeneratedBPBall = Cast<UBlueprint>(BallActorToSpawn);
     UClass* BallClassToSpawn = BallActorToSpawn->StaticClass();
+	
     if (BallClassToSpawn == nullptr)
     {
         UE_LOG(LogTemp, Error, TEXT("No Ball class to spawn from"));
         return;
     }
-    BallRef = GetWorld()->SpawnActor<ABall>(GeneratedBPBall->GeneratedClass, FVector(10, 0, 0), FRotator());
-
-	Direction = InitialDirection;
     
-	GetWorld()->GetTimerManager().SetTimer(InitialBallVelocityTimerHandle, this, &APongGameModeBase::InitializeBallVelocity, InitialBallVelocityDelay, false);
+    BallRef = GetWorld()->SpawnActor<ABall>(GeneratedBPBall->GeneratedClass, FVector(10, 0, 0), FRotator());
+	Direction = InitialDirection;
+	GetWorld()->GetTimerManager().SetTimer(InitialBallVelocityTimerHandle, this,
+	                                       &APongGameModeBase::InitializeBallVelocity, InitialBallVelocityDelay, false
+	                                       );
 }
 
 float APongGameModeBase::GenerateRandomDirection()
 {
     FRandomStream RandomStream;
     RandomStream.GenerateNewSeed();
-	
     return UKismetMathLibrary::SignOfFloat(RandomStream.FRandRange(-1.0f, 1.0f));
 }
 
