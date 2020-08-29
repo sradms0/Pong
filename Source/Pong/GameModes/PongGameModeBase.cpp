@@ -107,17 +107,17 @@ UBlueprint* APongGameModeBase::GenerateBlueprintForSpawn(const TCHAR* BPPath) co
 
 UBlueprint* APongGameModeBase::GenerateBallBlueprintForSpawn() const
 {
-    return GenerateBlueprintForSpawn(TEXT("/Game/Blueprints/BP_Ball"));
+    return GenerateBlueprintForSpawn(TEXT("/Game/Blueprints/Actors/BP_Ball"));
 }
 
 UBlueprint* APongGameModeBase::GeneratePlayerPaddleBlueprintForSpawn() const
 {
-    return GenerateBlueprintForSpawn(TEXT("/Game/Blueprints/BP_PlayerPaddle"));
+    return GenerateBlueprintForSpawn(TEXT("/Game/Blueprints/Pawns/BP_PlayerPaddle"));
 }
 
 UBlueprint* APongGameModeBase::GenerateAIPaddleBlueprintForSpawn() const
 {
-    return GenerateBlueprintForSpawn(TEXT("/Game/Blueprints/BP_AIPaddle"));
+    return GenerateBlueprintForSpawn(TEXT("/Game/Blueprints/Pawns/BP_AIPaddle"));
 }
 
 float APongGameModeBase::GenerateRandomDirection()

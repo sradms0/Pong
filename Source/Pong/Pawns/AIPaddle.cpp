@@ -2,7 +2,7 @@
 
 #include "AIPaddle.h"
 #include "Pong/Actors/Ball.h"
-#include "Pong/PongGameModeBase.h"
+#include "Pong/GameModes/PongGameModeBase.h"
 
 void AAIPaddle::BeginPlay()
 {

@@ -3,7 +3,7 @@
 
 #include "Boundary.h"
 #include "Components/BoxComponent.h"
-#include "Pong/PongGameModeBase.h"
+#include "Pong/GameModes/PongGameModeBase.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values

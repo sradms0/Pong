@@ -3,7 +3,7 @@
 
 #include "PaddleBase.h"
 #include "Pong/Actors/Ball.h"
-#include "Pong/PongGameModeBase.h"
+#include "Pong/GameModes/PongGameModeBase.h"
 #include "PaperSpriteComponent.h"
 #include "Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
