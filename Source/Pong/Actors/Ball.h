@@ -38,4 +38,6 @@ private:
 	void HitPaddle(APaddleBase* Paddle) const;
 
 	void HitBoundary() const;
+
+	void AssertPaddleAndBoundaryHit() const;
 };

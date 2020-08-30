@@ -24,9 +24,10 @@ void ABall::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAct
 {
 	if (OtherActor && (OtherActor != this) && OtherComp)
 	{
-		APaddleBase* Paddle = Cast<APaddleBase>(OtherActor);
-		ABoundary* Boundary = Cast<ABoundary>(OtherActor);
+		AssertPaddleAndBoundaryHit();
 		
+		ABoundary* Boundary = Cast<ABoundary>(OtherActor);
+		APaddleBase* Paddle = Cast<APaddleBase>(OtherActor);
 		if (Paddle)
 		{
 			HitPaddle(Paddle);
@@ -75,4 +76,14 @@ void ABall::HitBoundary() const
 	SpherePrimitive->SetPhysicsLinearVelocity(
 		FVector(CurrentSphereVelocity.X * -1, CurrentSphereVelocity.Y, NewSphereVelocityZ)
 	);
+}
+
+void ABall::AssertPaddleAndBoundaryHit() const
+{
+	TArray<AActor*> OverlappingActors;
+	GetOverlappingActors(OverlappingActors);
+	if (OverlappingActors.Num() > 1)
+	{
+		HitBoundary();
+	}
 }
