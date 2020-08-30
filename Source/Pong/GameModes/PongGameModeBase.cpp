@@ -62,7 +62,7 @@ void APongGameModeBase::SpawnBall(const float InitialDirection)
         UE_LOG(LogTemp, Error, TEXT("No Ball class to spawn from"));
         return;
     }
-    BallRef = GetWorld()->SpawnActor<ABall>(GeneratedBPBall->GeneratedClass, BallSpawnLocation, FRotator());
+    BallRef = GetWorld()->SpawnActor<ABall>(GeneratedBPBall->GeneratedClass, BallSpawnLocation, FRotator(0, 0, 0));
 	Direction = InitialDirection;
 	GetWorld()->GetTimerManager().SetTimer(InitialBallVelocityTimerHandle, this,
 	                                       &APongGameModeBase::InitializeBallVelocity, InitialBallVelocityDelay, false
