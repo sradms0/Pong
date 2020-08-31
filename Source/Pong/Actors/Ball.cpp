@@ -39,7 +39,6 @@ void ABall::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAct
 	}
 }
 
-// Called when the game starts or when spawned
 void ABall::BeginPlay()
 {
 	Super::BeginPlay();
