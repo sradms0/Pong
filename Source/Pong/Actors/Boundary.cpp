@@ -6,7 +6,6 @@
 #include "Pong/GameModes/PongGameModeBase.h"
 #include "Kismet/GameplayStatics.h"
 
-// Sets default values
 ABoundary::ABoundary()
 {
 	PrimaryActorTick.bCanEverTick = false;
