@@ -8,7 +8,6 @@
 #include "Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
 
-// Sets default values
 APaddleBase::APaddleBase()
 {
 	PrimaryActorTick.bCanEverTick = false;
