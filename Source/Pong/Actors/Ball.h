@@ -63,6 +63,14 @@ private:
 	/** Changes ball velocity after hitting a boundary */
 	void HitBoundary() const;
 
+	/**
+	 * Calculates balls new Z velocity component after hitting paddle; called within HitPaddle.
+	 * @param CurrentSphereVelocity - The linear velocity of the root collider primitive
+	 * @param PaddleVelocityZ - The paddles Z velocity component to determine angle of the ball
+	 * @return The balls new Z velocity component
+	 */
+	static float CalculateHitPaddleVelocityZ(const FVector CurrentSphereVelocity, const float PaddleVelocityZ);
+
 	/** 
 	 * Handles fringe case of ball colliding with a paddle and boundary, calling HitBoundary.
 	 * Without this, a paddle will have priority of hitting the ball, throwing the ball out of top/bottom boundaries.

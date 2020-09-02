@@ -48,34 +48,32 @@ void ABall::BeginPlay()
 
 void ABall::HitPaddle(APaddleBase* Paddle) const
 {
-	FRandomStream RandomStream;
-	RandomStream.GenerateNewSeed();
-	
-	const float PaddleVelocityZ = Paddle->GetColliderLinearVelocity().Z;
-	const float NewSphereVelocityZ = (PaddleVelocityZ / RandomStream.FRandRange(2.0f, 3.0f))
-										+ RandomStream.FRandRange(-200.0f, 200.0f);
-
 	UPrimitiveComponent* SpherePrimitive = Cast<UPrimitiveComponent>(Sphere);
 	const FVector CurrentSphereVelocity = SpherePrimitive->GetPhysicsLinearVelocity();
-	
+	const float NewBallVelocityZ = CalculateHitPaddleVelocityZ(CurrentSphereVelocity, Paddle->GetColliderLinearVelocity().Z);
 	SpherePrimitive->SetPhysicsLinearVelocity(
-		FVector(CurrentSphereVelocity.X * -1, CurrentSphereVelocity.Y, NewSphereVelocityZ)
+		FVector(CurrentSphereVelocity.X * -1.0f, CurrentSphereVelocity.Y, NewBallVelocityZ)
 	);
+	const FVector NewBallVelocity = SpherePrimitive->GetPhysicsLinearVelocity();
 }
 
 void ABall::HitBoundary() const
 {
-	FRandomStream RandomStream;
-	RandomStream.GenerateNewSeed();
-
 	UPrimitiveComponent* SpherePrimitive = Cast<UPrimitiveComponent>(Sphere);
 	const FVector CurrentSphereVelocity = SpherePrimitive->GetPhysicsLinearVelocity();
-	const float NewSphereVelocityZ = (CurrentSphereVelocity.Z * -1) + (RandomStream.FRandRange(-200.0f, 200.0f));
-	
 	SpherePrimitive->SetPhysicsLinearVelocity(
-		FVector(CurrentSphereVelocity.X * -1, CurrentSphereVelocity.Y, NewSphereVelocityZ)
+		FVector(CurrentSphereVelocity.X, CurrentSphereVelocity.Y, CurrentSphereVelocity.Z* -1.0f)
 	);
 }
+
+float ABall::CalculateHitPaddleVelocityZ(const FVector CurrentSphereVelocity, const float PaddleVelocityZ)
+{
+	return !FMath::Abs(PaddleVelocityZ) ? CurrentSphereVelocity.Z :
+			FMath::Sqrt(FMath::Square(PaddleVelocityZ) + FMath::Square(CurrentSphereVelocity.X)) 
+			* (PaddleVelocityZ / FMath::Abs(PaddleVelocityZ))
+			* 0.4f;
+}
+
 
 void ABall::AssertPaddleAndBoundaryHit() const
 {
